@@ -1,2 +1,7 @@
 gymnasium==0.28.1
 gymnasium[box2d]
+stable-baselines3[extra]
+torch
+torchvision
+torchaudio
+pyglet==1.5.27
