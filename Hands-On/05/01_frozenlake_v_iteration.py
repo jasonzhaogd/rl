@@ -49,8 +49,8 @@ class Agent:
             new_state, reward, is_done, _ = env.step(action)
             # During the test episodes, we also update our reward and 
             # transition tables to use all data from the environment.
-            # self.rewards[state, action, new_state] = reward
-            # self.transits[(state, action)][new_state] += 1
+            self.rewards[state, action, new_state] = reward
+            self.transits[(state, action)][new_state] += 1
             total_reward += reward
             if is_done:
                 break
@@ -85,7 +85,7 @@ if __name__ == "__main__":
         if reward > best_reward:
             print("Best reward updated %.3f -> %.3f" % (best_reward, reward))
             best_reward = reward
-        if reward > 0.9:
+        if reward > 0.8:
             print("Solved in %d iterations!" % i)
             break
     writer.close()
