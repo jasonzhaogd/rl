@@ -22,13 +22,14 @@ class Agent:
             self.transits[(self.state, action)][new_state] += 1
             self.state = self.env.reset() if is_done else new_state
     
+    # 计算 action value
     def calc_action_value(self, state, action):
         target_counts = self.transits[(state, action)]
         total = sum(target_counts.values())
         action_value = 0.0
         for new_state, count in target_counts.items():
             reward = self.rewards[(state, action, new_state)]
-            val = reward + GAMMA * self.values[new_state]
+            val = reward + GAMMA * self.values[new_state]  # 又依赖于 state value
             action_value += val * (count / total)
         return action_value
     
@@ -57,13 +58,14 @@ class Agent:
             state = new_state
         return total_reward
     
+    # 遍历经验数据，更新 state value
     def value_iteration(self):
         for state in range(self.env.observation_space.n):
-            state_values = [
-                self.calc_action_value(state, action)
+            action_values = [
+                self.calc_action_value(state, action)  # 依赖于 action value 的计算
                 for action in range(self.env.action_space.n)
             ]
-            self.values[state] = max(state_values)
+            self.values[state] = max(action_values)
             
 if __name__ == "__main__":
     test_env = gym.make(ENV_NAME)
