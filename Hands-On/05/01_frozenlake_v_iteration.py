@@ -27,7 +27,7 @@ class Agent:
         total = sum(target_counts.values())
         action_value = 0.0
         for new_state, count in target_counts.items():
-            reward = self.rewards[state, action, new_state]
+            reward = self.rewards[(state, action, new_state)]
             val = reward + GAMMA * self.values[new_state]
             action_value += val * (count / total)
         return action_value
