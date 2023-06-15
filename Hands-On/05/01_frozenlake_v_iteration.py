@@ -46,7 +46,7 @@ class Agent:
         state = env.reset()
         while True:
             action = self.select_action(state)
-            new_state, reward, is_done, _ = self.env.step(action)
+            new_state, reward, is_done, _ = env.step(action)
             # During the test episodes, we also update our reward and 
             # transition tables to use all data from the environment.
             # self.rewards[state, action, new_state] = reward
@@ -85,7 +85,7 @@ if __name__ == "__main__":
         if reward > best_reward:
             print("Best reward updated %.3f -> %.3f" % (best_reward, reward))
             best_reward = reward
-        if reward > 0.8:
+        if reward > 0.9:
             print("Solved in %d iterations!" % i)
             break
     writer.close()
