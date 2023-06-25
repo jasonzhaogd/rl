@@ -6,3 +6,4 @@ torchvision
 torchaudio
 pyglet==1.5.27
 tensorboardX
+streamlit
